@@ -62,13 +62,83 @@ function chatStripe(isAi, value, uniqueId) {
     )
 }
 
-const handleSubmit = async (e) => {
-    e.preventDefault()
 
-    const data = new FormData(form)
+
+
+/////////////////////////************************//////////////////////////
+
+
+
+// Initialize the speech recognition object
+const recognition = new webkitSpeechRecognition();
+let transcript2;
+
+// Set the recognition settings
+recognition.continuous = true;
+recognition.interimResults = true;
+recognition.lang = 'en-US';
+
+// Initialize the timeout variable
+let timeout;
+
+// Get the text element
+const text = document.getElementById('text');
+
+// Start the recognition process
+recognition.start();
+
+// Listen for speech recognition results
+recognition.onresult = event => {
+  // Clear the timeout
+  clearTimeout(timeout);
+  
+  // Get the last result
+  const result = event.results[event.results.length - 1];
+  
+  // Get the transcribed text
+  const transcript = result[0].transcript.trim();
+  transcript2 = transcript;
+  
+  
+  // Append the transcribed text to the text element
+  text.innerHTML += `<p>${transcript}</p>`;
+  
+  // Start the timeout again
+  timeout = setTimeout(() => {
+    recognition.stop();
+  }, 3000);
+};
+
+// Listen for speech recognition errors
+recognition.onerror = event => {
+  console.error(`Speech recognition error occurred: ${event.error}`);
+};
+
+// Listen for the end of the recognition process
+recognition.onend = () => {
+  
+ // alert(`${transcript2}`);
+  console.log(`text`)
+  console.log(`text ${transcript2}`)
+  console.log('Speech recognition stopped.');
+  handleSubmit()
+};
+
+
+
+
+
+
+///////////////////////**********************////////////////////////////////////
+
+const handleSubmit = async (e) => {
+   // e.preventDefault()
+    
+    const data = transcript2
+   // const data = new FormData(form)
 
     // user's chatstripe
-    chatContainer.innerHTML += chatStripe(false, data.get('prompt'))
+    chatContainer.innerHTML += chatStripe(false, data)
 
     // to clear the textarea input 
     form.reset()
@@ -92,7 +162,7 @@ const handleSubmit = async (e) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            prompt: data.get('prompt')
+            prompt: data
         })
     })
 
