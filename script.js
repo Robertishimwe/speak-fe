@@ -82,7 +82,7 @@ recognition.lang = 'en-US';
 let timeout;
 
 // Get the text element
-const text = document.getElementById('text');
+//const text = document.getElementById('text');
 
 // Start the recognition process
 recognition.start();
@@ -101,12 +101,12 @@ recognition.onresult = event => {
   
   
   // Append the transcribed text to the text element
-  text.innerHTML += `<p>${transcript}</p>`;
+  //text.innerHTML += `<p>${transcript}</p>`;
   
   // Start the timeout again
   timeout = setTimeout(() => {
     recognition.stop();
-  }, 3000);
+  }, 5000);
 };
 
 // Listen for speech recognition errors
@@ -174,6 +174,7 @@ const handleSubmit = async (e) => {
         const parsedData = data.bot.trim() // trims any trailing spaces/'\n' 
 
         typeText(messageDiv, parsedData)
+        recognition.start();
     } else {
         const err = await response.text()
 
