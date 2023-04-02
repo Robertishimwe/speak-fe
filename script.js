@@ -164,7 +164,7 @@ const handleSubmit = async (e) => {
     // messageDiv.innerHTML = "..."
     loader(messageDiv);
 
-    const response = await fetch("https://ishimwe.cyclic.app/api/chat/", {
+    const response = await fetch("https://conv.cyclic.app/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
