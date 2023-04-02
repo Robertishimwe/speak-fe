@@ -35,11 +35,19 @@ function typeText(element, text) {
 
 // generate voice function
 
-function speakText(text) {
+function speakText(text, onEndCallback) {
   const synth = window.speechSynthesis;
   const utterance = new SpeechSynthesisUtterance(text);
+  utterance.onend = onEndCallback; // set the onend event handler
   synth.speak(utterance);
 }
+
+
+// function speakText(text) {
+//   const synth = window.speechSynthesis;
+//   const utterance = new SpeechSynthesisUtterance(text);
+//   synth.speak(utterance);
+// }
 
 // generate unique ID for each message div of bot
 // necessary for typing text effect for that specific reply
@@ -171,15 +179,20 @@ const handleSubmit = async (e) => {
       const parsedData = data.bot.trim(); // trims any trailing spaces/'\n'
 
       typeText(messageDiv, parsedData)
+      speakText(parsedData, () => {
+        transcript2 = "";
+        recognition.start();
+      });
+      
       // speakText(parsedData)
 
       // transcript2 = "";
 
       // recognition.start();
-      speakText(parsedData).onend = () => {
-        transcript2 = "";
-        recognition.start();
-      };
+      // speakText(parsedData).onend = () => {
+      //   transcript2 = "";
+      //   recognition.start();
+      // };
     } else {
       const err = await response.text();
 
