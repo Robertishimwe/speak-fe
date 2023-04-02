@@ -38,8 +38,9 @@ function typeText(element, text) {
 function speakText(text, onEndCallback) {
   const synth = window.speechSynthesis;
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.onend = onEndCallback; // set the onend event handler
   synth.speak(utterance);
+  utterance.onend = onEndCallback; // set the onend event handler
+  
 }
 
 
