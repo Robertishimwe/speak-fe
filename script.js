@@ -33,6 +33,14 @@ function typeText(element, text) {
   }, 20);
 }
 
+// generate voice function
+
+function speakText(text) {
+  const synth = window.speechSynthesis;
+  const utterance = new SpeechSynthesisUtterance(text);
+  synth.speak(utterance);
+}
+
 // generate unique ID for each message div of bot
 // necessary for typing text effect for that specific reply
 // without unique ID, typing text will work on every element
@@ -163,6 +171,7 @@ const handleSubmit = async (e) => {
       const parsedData = data.bot.trim(); // trims any trailing spaces/'\n'
 
       typeText(messageDiv, parsedData);
+      speakText(parsedData)
 
       transcript2 = "";
 
