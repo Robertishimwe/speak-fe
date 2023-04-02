@@ -180,16 +180,16 @@ const handleSubmit = async (e) => {
       const parsedData = data.bot.trim(); // trims any trailing spaces/'\n'
 
       typeText(messageDiv, parsedData)
-      speakText(parsedData, () => {
-        transcript2 = "";
-        recognition.start();
-      });
+      // speakText(parsedData, () => {
+      //   transcript2 = "";
+      //   recognition.start();
+      // });
       
-      // speakText(parsedData)
+      speakText(parsedData)
 
-      // transcript2 = "";
+      transcript2 = "";
 
-      // recognition.start();
+      recognition.start();
       // speakText(parsedData).onend = () => {
       //   transcript2 = "";
       //   recognition.start();
