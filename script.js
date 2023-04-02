@@ -133,6 +133,10 @@ recognition.onend = () => {
 
 const handleSubmit = async (e) => {
    // e.preventDefault()
+
+   if(transcript2 == "" || transcript2 == null || transcript2 == undefined || transcript == "" || transcript == null || transcript == undefined){
+    recognition.start();
+   }
     
     const data = transcript2
    // const data = new FormData(form)
@@ -174,6 +178,10 @@ const handleSubmit = async (e) => {
         const parsedData = data.bot.trim() // trims any trailing spaces/'\n' 
 
         typeText(messageDiv, parsedData)
+
+        transcript = ""
+        transcript2 = ""
+        
     
         recognition.start();
     } else {
