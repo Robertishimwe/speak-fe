@@ -103,7 +103,7 @@ recognition.onresult = (event) => {
   clearTimeout(timeout);
 
   // Get the last result
-  const result = event.results[event.results.length ];
+  const result = event.results[event.results.length - 1];
 
   // Get the transcribed text
   const transcript = result[0].transcript;
