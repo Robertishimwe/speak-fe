@@ -107,6 +107,7 @@ recognition.onresult = (event) => {
 
   // Get the transcribed text
   const transcript = result[0].transcript.trim();
+  console.log(transcript)
   transcript2 = transcript;
 
   // Append the transcribed text to the text element
