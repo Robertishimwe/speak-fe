@@ -35,20 +35,20 @@ function typeText(element, text) {
 
 // generate voice function
 
-function speakText(text, onEndCallback) {
-  const synth = window.speechSynthesis;
-  const utterance = new SpeechSynthesisUtterance(text);
-  synth.speak(utterance);
-  utterance.onend = onEndCallback; // set the onend event handler
-  
-}
-
-
-// function speakText(text) {
+// function speakText(text, onEndCallback) {
 //   const synth = window.speechSynthesis;
 //   const utterance = new SpeechSynthesisUtterance(text);
 //   synth.speak(utterance);
+//   utterance.onend = onEndCallback; // set the onend event handler
+  
 // }
+
+
+function speakText(text) {
+  const synth = window.speechSynthesis;
+  const utterance = new SpeechSynthesisUtterance(text);
+  synth.speak(utterance);
+}
 
 // generate unique ID for each message div of bot
 // necessary for typing text effect for that specific reply
