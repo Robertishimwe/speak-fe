@@ -179,7 +179,6 @@ const handleSubmit = async (e) => {
 
         typeText(messageDiv, parsedData)
 
-        transcript = ""
         transcript2 = ""
         
     
