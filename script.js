@@ -134,7 +134,7 @@ recognition.onend = () => {
 const handleSubmit = async (e) => {
    // e.preventDefault()
 
-   if(transcript2 == "" || transcript2 == null || transcript2 == undefined || transcript == "" || transcript == null || transcript == undefined){
+   if(transcript2 == "" || transcript2 == null || transcript2 == undefined){
     recognition.start();
    }
     
