@@ -169,20 +169,17 @@ const handleSubmit = async (e) => {
     if (response.ok) {
       const data = await response.json();
       const parsedData = data.bot.trim(); // trims any trailing spaces/'\n'
-      const speakFunc =()=>{
-        transcript2 = "";
-        recognition.start()
-
-      }
 
       typeText(messageDiv, parsedData)
-      speakText(parsedData).then(
-        speakFunc()
-      )
+      // speakText(parsedData)
 
       // transcript2 = "";
 
       // recognition.start();
+      speakText(parsedData).onend = () => {
+        transcript2 = "";
+        recognition.start();
+      };
     } else {
       const err = await response.text();
 
