@@ -1,0 +1,13 @@
+(function(){const o=document.createElement("link").relList;if(o&&o.supports&&o.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))s(t);new MutationObserver(t=>{for(const r of t)if(r.type==="childList")for(const a of r.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&s(a)}).observe(document,{childList:!0,subtree:!0});function n(t){const r={};return t.integrity&&(r.integrity=t.integrity),t.referrerpolicy&&(r.referrerPolicy=t.referrerpolicy),t.crossorigin==="use-credentials"?r.credentials="include":t.crossorigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function s(t){if(t.ep)return;t.ep=!0;const r=n(t);fetch(t.href,r)}})();const g="/assets/bot-61bdb6bf.svg",h="/assets/user-bcdeb18e.svg",d=document.querySelector("form"),l=document.querySelector("#chat_container");let m;function y(e){e.textContent="",m=setInterval(()=>{e.textContent+=".",e.textContent==="...."&&(e.textContent="")},300)}function v(e,o){let n=0,s=setInterval(()=>{n<o.length?(e.innerHTML+=o.charAt(n),n++):clearInterval(s)},20)}function b(e,o){const n=window.speechSynthesis,s=new SpeechSynthesisUtterance(e);n.speak(s),s.onend=o}function S(){const e=Date.now(),n=Math.random().toString(16);return`id-${e}-${n}`}function p(e,o,n){return`
+        <div class="wrapper ${e&&"ai"}">
+            <div class="chat">
+                <div class="profile">
+                    <img 
+                      src=${e?g:h} 
+                      alt="${e?"bot":"user"}" 
+                    />
+                </div>
+                <div class="message" id=${n}>${o}</div>
+            </div>
+        </div>
+    `}const i=new webkitSpeechRecognition;let c;i.continuous=!0;i.interimResults=!0;i.lang="en-US";let f;i.start();i.onresult=e=>{clearTimeout(f);const n=e.results[e.results.length-1][0].transcript;console.log(n),c=n,f=setTimeout(()=>{i.stop()},5e3)};i.onerror=e=>{console.error(`Speech recognition error occurred: ${e.error}`)};i.onend=()=>{console.log("text"),console.log(`text ${c}`),console.log("Speech recognition stopped."),u()};const u=async e=>{if(c==""||c==null||c==null)i.start();else{const o=c;l.innerHTML+=p(!1,o),d.reset();const n=S();l.innerHTML+=p(!0," ",n),l.scrollTop=l.scrollHeight;const s=document.getElementById(n);y(s);const t=await fetch("https://conv.cyclic.app/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt:o})});if(clearInterval(m),s.innerHTML=" ",t.ok){const a=(await t.json()).bot.trim();v(s,a),b(a,()=>{c="",i.start()})}else{const r=await t.text();s.innerHTML="Something went wrong",alert(r)}}};d.addEventListener("submit",u);d.addEventListener("keyup",e=>{e.keyCode===13&&u()});
