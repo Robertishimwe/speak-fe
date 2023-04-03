@@ -117,7 +117,7 @@ recognition.onresult = (event) => {
   // Start the timeout again
   timeout = setTimeout(() => {
     recognition.stop();
-  }, 5000);
+  }, 2000);
 };
 
 // Listen for speech recognition errors
